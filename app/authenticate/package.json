@@ -1,0 +1,3 @@
+{ "name" : "Dreamineering Authentication"
+, "main" : "authenticate.js"
+}

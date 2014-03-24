@@ -1,0 +1,8 @@
+app:
+  port: 3003
+  pub_dir: "/public"
+  jwt_secret: "your secret key salt goes here"
+log:
+  plugin: npmlog
+  level: debug
+  customlevels: 1

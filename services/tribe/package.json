@@ -1,0 +1,22 @@
+{
+  "name": "drmg-tribe",
+  "author": "Matt Mischewski",
+  "version": "0.0.1",
+  "description": "Tribe management",
+  "repository": "https://github.com/dreamineering/drmg-tribe",
+  "scripts": {
+    "test": "mocha -w"
+  },
+  "dependencies": {
+    "express-jwt": "~0.1.0",
+    "jsonwebtoken": "~0.1.0",
+    "monk": "~0.7.1",
+    "bcrypt-nodejs": "0.0.3"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-watch": "~0.5.3",
+    "should": "~2.1.0",
+    "grunt-contrib-jshint": "~0.7.1"
+  }
+}
