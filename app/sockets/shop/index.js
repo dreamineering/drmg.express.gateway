@@ -1,3 +1,4 @@
+
 var io          = {},
   fs          = require('fs'),
   _           = require('lodash'),
@@ -78,3 +79,6 @@ var beginListening = function beginListening() {
   });
 
 };
+
+// FULL CREDIT
+// https://github.com/Wildhoney/Magento-on-Angular

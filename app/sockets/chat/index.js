@@ -1,6 +1,4 @@
 
-// see http://procbits.com/2014/01/06/poor-mans-firebase-leveldb-rest-and-websockets
-
 var levelup = require('levelup')
   , multilevel = require('multilevel')
   , levelLiveStream = require('level-live-stream')
@@ -69,3 +67,6 @@ var port = 8014;
 server.listen(port, function() {
   console.log('listening on...' + port);
 })
+
+// FULL CREDIT
+// see http://procbits.com/2014/01/06/poor-mans-firebase-leveldb-rest-and-websockets

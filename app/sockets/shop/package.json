@@ -1,0 +1,16 @@
+{
+  "name": "drmg-socket-shop",
+  "version": "0.0.0",
+  "description": "streaming interface to spree",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "matt mischewski",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "~2.4.1",
+    "request": "~2.34.0",
+    "node-snapshot": "~0.3.10"
+  }
+}

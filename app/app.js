@@ -12,6 +12,7 @@ var xsrf                = require('../services/security/xsrf');
 var protectJSON         = require('../services/security/protectJSON');
 
 require('./sockets/chat');
+require('./sockets/shop');
 
 exports = module.exports;
 
