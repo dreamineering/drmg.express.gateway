@@ -2,6 +2,15 @@ app:
   port: 3003
   pub_dir: "/public"
   jwt_secret: "your secret key salt goes here"
+socket:
+  port: 8888
+  host: localhost
+ecommerce:
+  host: "http://localhost:"
+  port: 3000
+  path: "/api/products"
+  provider: "spree"
+  key: "b16145ad111b79f461be23577c3dad91b3e753ab20d1be4b"
 log:
   plugin: npmlog
   level: debug

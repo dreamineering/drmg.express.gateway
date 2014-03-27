@@ -1,0 +1,20 @@
+{
+  "name": "drmg-socket-chat",
+  "version": "0.0.0",
+  "description": "level db realtime streaming",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "matt mischewski",
+  "license": "ISC",
+  "dependencies": {
+    "event-stream": "~3.0.20",
+    "levelup": "~0.18.2",
+    "shoe": "0.0.15",
+    "level-live-stream": "~1.4.9",
+    "multilevel": "~5.5.0",
+    "browserify": "~3.19.1",
+    "leveldown": "~0.10.2"
+  }
+}

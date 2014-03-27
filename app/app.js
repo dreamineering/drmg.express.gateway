@@ -11,16 +11,19 @@ var allowCrossDomain    = require('../services/security/cors');
 var xsrf                = require('../services/security/xsrf');
 var protectJSON         = require('../services/security/protectJSON');
 
+require('./sockets/chat');
 
 exports = module.exports;
 
 exports.setup = function(app) {
 
+
+
   app.use(express.compress());
 
   app.use(allowCrossDomain);
   app.use('/api', expressJwt({secret: CONF.app.jwt_secret}));
-  
+
   //app.use(express.json()); not sure if this is needed
   app.use(express.urlencoded());
 
@@ -50,16 +53,16 @@ exports.setup = function(app) {
   }
 
   //---- Mounting application modules
-  // authentication 
+  // authentication
   app.use('/authenticate',  require('./authenticate')); // attach to sub-route
 
   // api
-  app.use('/api/blog',  require('./api/blog')); 
+  app.use('/api/blog',  require('./api/blog'));
 
   // web sub routes
-  app.use('/hello', require('./web/hello')); 
-  app.use('/pages', require('./web/pages')); 
-  app.use('/blog',  require('./web/blog'));  
+  app.use('/hello', require('./web/hello'));
+  app.use('/pages', require('./web/pages'));
+  app.use('/blog',  require('./web/blog'));
 
   app.use(require('./routes')); // attach to root route
 
