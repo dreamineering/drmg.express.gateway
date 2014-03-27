@@ -1,11 +1,10 @@
 
-var io          = {},
-  fs          = require('fs'),
-  _           = require('lodash'),
-  request     = require('request'),
-  //newRelic    = require('newrelic'),
-  snapshot    = require('node-snapshot'),
-  CONF        = require('config');
+var io          = {};
+var  fs         = require('fs');
+var  _          = require('lodash');
+var  request    = require('request');
+var  snapshot   = require('node-snapshot');
+var  CONF       = require('config');
 
 /**
  * @property url

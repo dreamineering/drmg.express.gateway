@@ -1,0 +1,11 @@
+{
+  "name": "drmg-spree-proxy",
+  "author": "Matt Mischewski",
+  "version": "0.0.1",
+  "description": "Spree Proxy",
+  "scripts": {},
+  "main": "shop_service",
+  "dependencies": {
+    "request": "~2.34.0"
+  }
+}

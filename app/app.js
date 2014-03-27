@@ -1,9 +1,9 @@
-var express   = require('express');
-var CONF    = require('config');
-var jwt = require('jsonwebtoken');  //https://npmjs.org/package/node-jsonwebtoken
-var expressJwt = require('express-jwt'); //https://npmjs.org/package/express-jwt
-var log     = require('metalogger')();
-var hbs     = require('hbs')
+var express        = require('express');
+var CONF           = require('config');
+var jwt            = require('jsonwebtoken');  //https://npmjs.org/package/node-jsonwebtoken
+var expressJwt     = require('express-jwt'); //https://npmjs.org/package/express-jwt
+var log            = require('metalogger')();
+var hbs            = require('hbs')
 
 // security
 // security
@@ -12,20 +12,20 @@ var xsrf                = require('../services/security/xsrf');
 var protectJSON         = require('../services/security/protectJSON');
 
 require('./sockets/chat');
-require('./sockets/shop');
+//require('./sockets/shop');
+
+// require('../services/shop');
 
 exports = module.exports;
 
 exports.setup = function(app) {
 
 
-
   app.use(express.compress());
 
   app.use(allowCrossDomain);
-  app.use('/api', expressJwt({secret: CONF.app.jwt_secret}));
+  //app.use('/api', expressJwt({secret: CONF.app.jwt_secret}));
 
-  //app.use(express.json()); not sure if this is needed
   app.use(express.urlencoded());
 
   app.set('views', __dirname + '/views');
@@ -59,11 +59,14 @@ exports.setup = function(app) {
 
   // api
   app.use('/api/blog',  require('./api/blog'));
+  app.use('/api/products',  require('./api/shop'));
 
   // web sub routes
   app.use('/hello', require('./web/hello'));
   app.use('/pages', require('./web/pages'));
   app.use('/blog',  require('./web/blog'));
+
+
 
   app.use(require('./routes')); // attach to root route
 

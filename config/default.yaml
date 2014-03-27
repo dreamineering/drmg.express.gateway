@@ -11,6 +11,7 @@ ecommerce:
   path: "/api/products"
   provider: "spree"
   key: "b16145ad111b79f461be23577c3dad91b3e753ab20d1be4b"
+  auth_header: "X-Spree-Token"
 log:
   plugin: npmlog
   level: debug

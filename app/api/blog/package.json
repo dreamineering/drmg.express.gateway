@@ -1,3 +1,4 @@
-{ "name" : "Teh blog api"
-, "main" : "api_blog.js"
+{
+  "name" : "drmg blog api",
+  "main" : "api_blog.js"
 }

@@ -1,3 +1,4 @@
-{ "name" : "Main App Setup"
-, "main" : "app.js"
+{
+  "name" : "Main App Setup",
+  "main" : "app.js"
 }
