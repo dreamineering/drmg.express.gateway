@@ -1,17 +1,17 @@
 
-var io          = {};
-var  fs         = require('fs');
-var  _          = require('lodash');
-var  request    = require('request');
-var  snapshot   = require('node-snapshot');
-var  CONF       = require('config');
+var io         = {};
+var fs         = require('fs');
+var _          = require('lodash');
+var request    = require('request');
+var snapshot   = require('node-snapshot');
+var CONF       = require('config');
 
 /**
  * @property url
  * @type {String}
  */
 var options = {
-  url: CONF.ecommerce.host + CONF.ecommerce.port + '/api/products',
+  url: CONF.ecommerce.host + CONF.ecommerce.port + '/snapshots/api/products',
   headers: {
     'X-Spree-Token': CONF.ecommerce.key
   }
@@ -46,14 +46,18 @@ var beginListening = function beginListening() {
 
     // Bootstrap Snapshot passing in the reference for the socket as a dependency.
     var $snapshot = new snapshot('products').bootstrap(socket).useDelta(true);
+    //var $snapshot = new snapshot().bootstrap(socket).useDelta(true);
 
     // Configure the defaults.
     $snapshot.setPageNumber(1);
     $snapshot.setPerPage(15);
     $snapshot.setSortBy('name', 'asc');
-    $snapshot.setRanges(['price']);
-    $snapshot.setGroups(['manufacturer', 'colour']);
-    $snapshot.setCollection(products, ['id', 'name', 'colour', 'price', 'manufacturer']);
+    $snapshot.setRanges(['tax_category_id']);
+    $snapshot.setGroups(['tax_category_id']);
+    $snapshot.setCollection(products);
+    // $snapshot.setCollection(products, ['id', 'name', 'colour', 'price', 'manufacturer']);
+
+
 
     socket.on('snapshot/products/colours', function colours(ids) {
       $snapshot.applyFilter('colour', function colour(colourDimension) {

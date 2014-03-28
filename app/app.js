@@ -6,15 +6,12 @@ var log            = require('metalogger')();
 var hbs            = require('hbs')
 
 // security
-// security
 var allowCrossDomain    = require('../services/security/cors');
 var xsrf                = require('../services/security/xsrf');
 var protectJSON         = require('../services/security/protectJSON');
 
 require('./sockets/chat');
-//require('./sockets/shop');
-
-// require('../services/shop');
+require('./sockets/shop');
 
 exports = module.exports;
 
@@ -67,9 +64,7 @@ exports.setup = function(app) {
   app.use('/blog',  require('./web/blog'));
 
 
-
   app.use(require('./routes')); // attach to root route
-
 
   //--- End of Internal modules
 
