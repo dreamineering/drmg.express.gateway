@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "seneca": "~0.5.14",
-    "express": "3.x",
+    "express": "4.x",
     "config": "*",
     "lodash": "~2.4.1",
     "crossfilter": "~1.2.0",
@@ -40,7 +40,11 @@
     "node-uuid": "~1.4.1",
     "debug": "~0.7.4",
     "validator": "~3.1.0",
-    "seneca-pay": "0.0.5"
+    "seneca-pay": "0.0.5",
+    "body-parser": "^1.0.1",
+    "compression": "^1.0.1",
+    "method-override": "^1.0.0",
+    "qs": "^0.6.6"
   },
   "devDependencies": {
     "assert": "*",

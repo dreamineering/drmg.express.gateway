@@ -1,4 +1,6 @@
 var express        = require('express');
+var qs             = require('qs');
+
 var CONF           = require('config');
 var jwt            = require('jsonwebtoken');  //https://npmjs.org/package/node-jsonwebtoken
 var expressJwt     = require('express-jwt'); //https://npmjs.org/package/express-jwt
@@ -18,20 +20,21 @@ exports = module.exports;
 exports.setup = function(app) {
 
 
-  app.use(express.compress());
+  app.use(require('compression')());
 
   app.use(allowCrossDomain);
   //app.use('/api', expressJwt({secret: CONF.app.jwt_secret}));
 
-  app.use(express.urlencoded());
+  //app.use(express.urlencoded());  http://stackoverflow.com/questions/22143105/node-js-express-express-json-and-express-urlencoded-with-form-submit
 
   app.set('views', __dirname + '/views');
   app.set('view engine', 'handlebars');
   app.engine('handlebars', hbs.__express);
 
-  app.use(express.bodyParser());
-  app.use(express.methodOverride());
-  app.use(express.query());
+  app.use(require('body-parser')());
+  app.use(require('method-override')());
+
+  //app.use(express.query());
   app.use(protectJSON);
 
   //app.use(express.responseTime());
@@ -63,14 +66,9 @@ exports.setup = function(app) {
   app.use('/pages', require('./web/pages'));
   app.use('/blog',  require('./web/blog'));
 
-
   app.use(require('./routes')); // attach to root route
 
   //--- End of Internal modules
-
-  //-- ATTENTION: make sure app.router and errorHandler are the very last two app.use() calls
-  //-- ATTENTION: and in the sequence they are in, or it won't work!!!
-  app.use(app.router);
 
   // Catch-all error handler. Modify as you see fit, but don't overuse.
   // Throwing exceptions is not how we normally handle errors in Node.

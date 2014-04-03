@@ -11,7 +11,7 @@ var express = require('express')
 // Local includes
 //var mod_hello = require('./web/hello');
 var mod_pages = require('./web/pages');
-var mod_blog = require('./web/blog');
+//var mod_blog = require('./web/blog');
 
 /** Global ROUTES **/
 app.get('/', mod_pages.callbacks.home);
