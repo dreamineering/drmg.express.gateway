@@ -23,6 +23,7 @@ exports.setup = function(app) {
   app.use(require('compression')());
 
   app.use(allowCrossDomain);
+  // commented this out in favour of having control on each route  Q???
   //app.use('/api', expressJwt({secret: CONF.app.jwt_secret}));
 
   //app.use(express.urlencoded());  http://stackoverflow.com/questions/22143105/node-js-express-express-json-and-express-urlencoded-with-form-submit

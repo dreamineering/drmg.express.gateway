@@ -15,6 +15,3 @@ var mod_pages = require('./web/pages');
 
 /** Global ROUTES **/
 app.get('/', mod_pages.callbacks.home);
-
-/** blog ROUTES **/
-//app.get('/blog', mod_blog.callbacks.list);
