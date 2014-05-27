@@ -7,7 +7,7 @@ var CONF        = require('config');
 var expressJwt  = require('express-jwt');
 
 // Service
-var Shop = require('../../../services/shop');
+var Shop = require('../../../lib/domain/shop');
 
 var ApiProductsController = require('./controllers/api_product_controller');
 

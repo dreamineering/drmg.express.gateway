@@ -19,7 +19,7 @@ if ('log' in CONF) {
     for (var key in CONF.log.customlevels) {
       process.env['NODE_LOGGER_LEVEL_' + key] = CONF.log.customlevels[key];
     }
-  }     
+  }
 }
 
 require('./app').setup(app);
@@ -39,7 +39,7 @@ if (isClusterMaster ||
 log.debug("is http thread? " + is_http_thread);
 
 if (isClusterMaster) {
-  require('./services/clustering').setup();
+  require('./config/clustering').setup();
 }
 
 if (is_http_thread) {
@@ -50,3 +50,4 @@ if (is_http_thread) {
 if (!isClusterMaster && cluster.isMaster) {
   log.notice("Express server instance listening on port " + CONF.app.port);
 }
+

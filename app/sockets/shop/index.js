@@ -26,7 +26,10 @@ var products = '';
 
 // Retrieve the products so we'll always have a fresh copy to serve to
 // new connections.
-request(options, function (error, response, body) {
+request(options, function (err, response, body) {
+  if (err) {
+    return console.log(err);
+  }
   products = JSON.parse(body);
   io = require('socket.io').listen(parseInt(CONF.socket.port));
   beginListening();

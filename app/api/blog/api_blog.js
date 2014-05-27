@@ -4,13 +4,9 @@ var _ = require('lodash')
   , express = require('express')
   , app = exports = module.exports = express();
 
-// Service
-//var blog = require('../../../services/minty').minty;
-var blog = require('../../../services/blog').blog;
+// Lib
+var blog = require('../../../lib/init/blog_init').blog;
 
-
-
-//var tribe = require('../../../services/tribe').tribe;
 var ApiBlogController = require('./controllers/api_blog_controller');
 
 exports.callbacks = new ApiBlogController(blog);
@@ -20,8 +16,4 @@ app.post("/", exports.callbacks.create);
 
 // read
 app.get("/", exports.callbacks.list);
-
-
-
-
 

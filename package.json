@@ -44,7 +44,11 @@
     "body-parser": "^1.0.1",
     "compression": "^1.0.1",
     "method-override": "^1.0.0",
-    "qs": "^0.6.6"
+    "qs": "^0.6.6",
+    "leveldown": "^0.10.2",
+    "shortest-route": "0.0.7",
+    "nodemon": "~1.0.19",
+    "g": "~1.0.2"
   },
   "devDependencies": {
     "assert": "*",

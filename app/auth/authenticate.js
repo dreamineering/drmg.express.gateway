@@ -5,7 +5,7 @@ var _ = require('lodash')
   , express = require('express')
   , app = exports = module.exports = express();
 
-var tribe = require('../../services/initTribe').tribe;
+var tribe = require('../../lib/init/tribe_init').tribe;
 var AuthenticationController = require('./controllers/authentication_controller');
 
 exports.callbacks = new AuthenticationController(tribe);

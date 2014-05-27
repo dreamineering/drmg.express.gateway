@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "description": "Spree Proxy",
   "scripts": {},
-  "main": "shop_service",
+  "main": "shop_proxy",
   "dependencies": {
     "request": "~2.34.0"
   }

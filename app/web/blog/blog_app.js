@@ -4,7 +4,8 @@ var _ = require('lodash')
   , express = require('express')
   , app = exports = module.exports = express();
 
-var blog = require('../../../services/initBlog').blog;
+// Lib
+var blog = require('../../../lib/init/blog_init').blog;
 
 var BlogController = require('./controllers/blog_controller');
 

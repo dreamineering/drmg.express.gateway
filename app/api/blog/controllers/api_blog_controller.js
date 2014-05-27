@@ -1,17 +1,11 @@
 
-
 var ApiBlogController = function(blog) {
 
   this.list = function(req, res) {
-
-      console.log('blog', blog);
-
-      return blog.archive({status:'draft'},function(err, results){
-        if (err) { throw err; }
-        return res.send(results);
-      });
-
-
+    return blog.archive({status:'draft'},function(err, results){
+      if (err) return next (err);
+      return res.send(results);
+    });
 
   };
 

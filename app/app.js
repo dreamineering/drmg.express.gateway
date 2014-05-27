@@ -2,18 +2,19 @@ var express        = require('express');
 var qs             = require('qs');
 
 var CONF           = require('config');
-var jwt            = require('jsonwebtoken');  //https://npmjs.org/package/node-jsonwebtoken
-var expressJwt     = require('express-jwt'); //https://npmjs.org/package/express-jwt
+var jwt            = require('jsonwebtoken');    //https://npmjs.org/package/node-jsonwebtoken
+var expressJwt     = require('express-jwt');     //https://npmjs.org/package/express-jwt
 var log            = require('metalogger')();
 var hbs            = require('hbs')
 
 // security
-var allowCrossDomain    = require('../services/security/cors');
-var xsrf                = require('../services/security/xsrf');
-var protectJSON         = require('../services/security/protectJSON');
+var allowCrossDomain    = require('../lib/middleware/security/cors');
+var xsrf                = require('../lib/middleware/security/xsrf');
+var protectJSON         = require('../lib/middleware/security/protectJSON');
 
 require('./sockets/chat');
 require('./sockets/shop');
+
 
 exports = module.exports;
 
@@ -26,7 +27,8 @@ exports.setup = function(app) {
   // commented this out in favour of having control on each route  Q???
   //app.use('/api', expressJwt({secret: CONF.app.jwt_secret}));
 
-  //app.use(express.urlencoded());  http://stackoverflow.com/questions/22143105/node-js-express-express-json-and-express-urlencoded-with-form-submit
+  // http://stackoverflow.com/questions/22143105/node-js-express-express-json-and-express-urlencoded-with-form-submit
+  //app.use(express.urlencoded());
 
   app.set('views', __dirname + '/views');
   app.set('view engine', 'handlebars');
@@ -51,12 +53,14 @@ exports.setup = function(app) {
 
     //app.use(require('less-middleware')({ src: pub_dir }));
     app.use(express.static(pub_dir));
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+    //app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
   }
 
   //---- Mounting application modules
   // authentication
-  app.use('/authenticate',  require('./authenticate')); // attach to sub-route
+  app.use('/authenticate',  require('./auth')); // attach to sub-route
+
+  require('./sockets/simple_chat')(app);
 
   // api
   app.use('/api/blog',  require('./api/blog'));
@@ -70,27 +74,33 @@ exports.setup = function(app) {
   app.use(require('./routes')); // attach to root route
 
   //--- End of Internal modules
-
   // Catch-all error handler. Modify as you see fit, but don't overuse.
   // Throwing exceptions is not how we normally handle errors in Node.
   app.use(function catchAllErrorHandler(err, req, res, next){
 
-    if (err.constructor.name === 'UnauthorizedError') {
-      res.send(401, 'Unauthorized');
-    } else {
-      // Emergency: means system is unusable
-      log.emergency(err);
-      res.send(500);
-      // We aren't in the business of hiding exceptions under the rug. It should
-      // still crash the process. All we want is: to properly log the error before
-      // that happens.
-      //
-      // Clustering code in the lib/clustering module will restart the crashed process.
-      // Make sure to always run clustering in production!
-      setTimeout(function() { // Give a chance for response to be sent, before killing the process
-        process.exit(1);
-      }, 10);
+    // Emergency: means system is unusable
+    log.emergency(err);
 
-    }
+    res.status(err.statusCode || 500);
+
+    res.format({
+      text: function() {
+        res.send(err.message);
+      },
+      json: function() {
+        res.send(err);
+      },
+      html: function() {
+        res.render('errors', { err: err });
+      }
+    });
+
+    // Clustering code in the lib/clustering module will restart the crashed process.
+    // Make sure to always run clustering in production!
+    setTimeout(function() { // Give a chance for response to be sent, before killing the process
+      process.exit(1);
+    }, 10);
+
   });
+
 };
